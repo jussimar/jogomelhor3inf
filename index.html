@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+   <title>A nave agora atira!</title>
+   <script src="teclado.js"></script>
+   <script src="heroi.js"></script>
+   <script src="bola.js"></script>
+   <script src="animacao.js"></script>
+   
+   <style type="text/css">
+      #meu_canvas{
+          background-image: url("img/teste.jpg");
+      }
+   </style>
+</head>
+
+<body>
+   <canvas id="meu_canvas" width="500" height="500"></canvas>
+   <script>
+      var canvas = document.getElementById('meu_canvas');
+      var contexto = canvas.getContext('2d');
+
+      var teclado = new Teclado(document);
+      var animacao = new Animacao(contexto);
+
+      // Um sprite pode ler o teclado para saber como se comportar, por que não?
+      var heroi = new Heroi(contexto, teclado, animacao);
+      heroi.x = 0;
+      heroi.y = 400;
+      animacao.novoSprite(heroi);
+
+      teclado.disparou(ESPACO, function() {
+         heroi.atirar();
+      });
+
+      animacao.ligar();
+   </script>
+</body>
+
+</html>
